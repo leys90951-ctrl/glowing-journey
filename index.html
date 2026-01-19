@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدخل إلى البرمجة - جيل النهضة التقنية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #040a08;
+            --emerald: #10b981;
+            --gold: #d4af37;
+            --gold-bright: #fbbf24;
+            --glass-bg: rgba(16, 185, 129, 0.03);
+            --border-color: rgba(212, 175, 55, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        .slides-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 120px;
+            padding: 80px 20px;
+        }
+
+        .slide {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 680px;
+            background: rgba(8, 20, 17, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            position: relative;
+            padding: 70px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* خلفية الشبكة الهندسية بدلاً من النجوم */
+        .slide::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(circle, white, transparent 80%);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .quran-verse {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .verse-txt {
+            font-family: 'Amiri', serif;
+            font-size: 38px;
+            color: var(--gold);
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .verse-source {
+            font-size: 14px;
+            color: var(--emerald);
+            margin-top: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        h1, h2 {
+            font-family: 'Amiri', serif;
+            color: var(--gold-bright);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { font-size: 72px; font-weight: 700; }
+        h2 { font-size: 52px; font-weight: 700; position: relative; display: inline-block; width: 100%; }
+        h2::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .content-box {
+            font-size: 28px;
+            color: #cbd5e1;
+            text-align: center;
+            max-width: 950px;
+            margin: 0 auto;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            background: var(--glass-bg);
+            padding: 40px 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+        }
+
+        .info-card i {
+            font-size: 55px;
+            color: var(--gold);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .info-card h3 {
+            color: var(--gold-bright);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .info-card p {
+            color: #94a3b8;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .info-card:hover {
+            transform: translateY(-12px);
+            background: rgba(212, 175, 55, 0.07);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* زر الذكاء الاصطناعي - تصميم أنيق */
+        .ai-btn {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gold-bright);
+            border: 1px solid var(--gold);
+            padding: 14px 30px;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .ai-btn:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 10, 8, 0.98);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            z-index: 100;
+            text-align: center;
+            border-radius: 40px;
+        }
+
+        .ai-txt {
+            font-family: 'Amiri', serif;
+            font-size: 34px;
+            color: var(--gold-bright);
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(16, 185, 129, 0.1);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .close-btn {
+            margin-top: 40px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 10px 30px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .highlight {
+            color: var(--gold-bright);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 2px;
+        }
+
+        /* شريط الجوانب التقني */
+        .side-accent {
+            position: absolute;
+            left: 0; top: 20%; bottom: 20%;
+            width: 4px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            border-radius: 0 4px 4px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="slides-container">
+
+    <!-- شريحة 1: الترحيب والتعريف -->
+    <div class="slide" data-topic="مفهوم البرمجة المبسط">
+        <div class="side-accent"></div>
+        <div class="quran-verse">
+            <p class="verse-txt">"الَّذِي عَلَّمَ بِالْقَلَمِ * عَلَّمَ الْإِنسَانَ مَا لَمْ يَعْلَمْ"</p>
+            <p class="verse-source">سورة العلق - 4-5</p>
+        </div>
+        <h1>ما هي البرمجة؟</h1>
+        <div class="content-box">
+            ببساطة، البرمجة هي <span class="highlight">لغة الحوار بينك وبين الآلة</span>. أنت لا تحتاج أن تكون عبقرياً في الرياضيات، بل تحتاج فقط أن تعرف كيف تعطي أوامر مرتبة ليقوم الحاسوب بتنفيذها نيابة عنك.
+        </div>
+        <button class="ai-btn" onclick="askAI(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> تأمل ملهم</button>
+        <div class="overlay"><div class="content"></div><button class="close-btn" onclick="closeOverlay(this)">فهمت</button></div>
+    </div>
+
+    <!-- شريحة 2: تنوع اللغات وسهولتها -->
+    <div class="slide" data-topic="تنوع لغات البرمجة وسهولة التعلم">
+        <div class="side-accent"></div>
+        <h2>عالم من اللغات</h2>
+        <div class="content-box">
+            مثلما يتحدث البشر لغات مختلفة، للحواسيب لغات أيضاً.. سهلة، منطقية، ومتنوعة.
+        </div>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fa-solid fa-code-merge"></i>
+                <h3>تنوع بلا تعقيد</h3>
+                <p>هناك لغات لتصميم المواقع، ولغات لصناعة الألعاب، وأخرى للروبوتات. ابدأ بواحدة وستفتح لك كل الأبواب.</p>
+            </div>
+            <div class="info-card">
+                <i class="fa-solid fa-pen-nib"></i>
+                <h3>سهلة كالرسم</h3>
+                <p>البرمجة اليوم أصبحت أقرب للغة البشرية. إذا كنت تستطيع كتابة جملة مفيدة، فأنت تستطيع البرمجة.</p>
+            </div>
+        </div>
+        <button class="ai-btn" onclick="askAI(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> لماذا تتعدد اللغات؟</button>
+        <div class="overlay"><div class="content"></div><button class="close-btn" onclick="closeOverlay(this)">إغلاق</button></div>
+    </div>
+
+    <!-- شريحة 3: فائدة البرمجة في حياتنا -->
+    <div class="slide" data-topic="فوائد البرمجة في كل مجالات الحياة">
+        <div class="side-accent"></div>
+        <div class="quran-verse">
+            <p class="verse-txt">"وَكُلَّ شَيْءٍ أَحْصَيْنَاهُ فِي إِمَامٍ مُّبِينٍ"</p>
+            <p class="verse-source">سورة يس - 12</p>
+        </div>
+        <h2>لماذا نتعلم البرمجة؟</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <i class="fa-solid fa-gears"></i>
+                <h3>ترتيب التفكير</h3>
+                <p>تعلمك كيف تفكر بمنطق، وكيف تحل المشاكل الكبيرة بتقسيمها إلى أجزاء صغيرة جداً.</p>
+            </div>
+            <div class="info-card">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>قوة خارقة</h3>
+                <p>تخيل أنك تستطيع بناء نظام يخدم آلاف الناس وأنت جالس في مكانك. البرمجة هي سلاح العصر الحديث.</p>
+            </div>
+            <div class="info-card">
+                <i class="fa-solid fa-briefcase"></i>
+                <h3>مطلوبة في كل شيء</h3>
+                <p>من الطب إلى التجارة؛ البرمجة تدخل في كل تفاصيل حياتنا وتجعلنا أكثر كفاءة وإنتاجية.</p>
+            </div>
+        </div>
+        <button class="ai-btn" onclick="askAI(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> أثر البرمجة على العقل</button>
+        <div class="overlay"><div class="content"></div><button class="close-btn" onclick="closeOverlay(this)">إغلاق</button></div>
+    </div>
+
+    <!-- شريحة 4: المسلم والنهضة التقنية -->
+    <div class="slide" data-topic="واجب المسلم تجاه التطور التقني">
+        <div class="side-accent"></div>
+        <div class="quran-verse">
+            <p class="verse-txt">"وَأَعِدُّوا لَهُم مَّا اسْتَطَعْتُم مِّن قُوَّةٍ"</p>
+            <p class="verse-source">سورة الأنفال - 60</p>
+        </div>
+        <h2>الريادة لا التقليد</h2>
+        <div class="content-box">
+            لا يليق بالمسلم أن يكون مجرد مستهلك. نحن أمة العلم، واليوم <span class="highlight">القوة هي التقنية والبرمجيات</span>.
+            <br><br>
+            امتلاكك لمهارات البرمجة يعني قدرتك على بناء اقتصاد أمتك، وحمايتها، ونشر رسالتها السامية. العلم التقني اليوم هو أحد أعظم سبل القوة والنهضة.
+        </div>
+        <button class="ai-btn" onclick="askAI(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> كيف نبدأ النهضة؟</button>
+        <div class="overlay"><div class="content"></div><button class="close-btn" onclick="closeOverlay(this)">إغلاق</button></div>
+    </div>
+
+    <!-- شريحة 5: الخاتمة والبداية -->
+    <div class="slide" data-topic="النية والعزم على البدء">
+        <div class="side-accent"></div>
+        <div class="quran-verse">
+            <p class="verse-txt">"فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى اللَّهِ"</p>
+            <p class="verse-source">سورة آل عمران - 159</p>
+        </div>
+        <div style="text-align: center;">
+            <h1 style="font-size: 56px;">رحلتك تبدأ بكلمة..</h1>
+            <p class="content-box" style="margin-top: 35px;">
+                البرمجة يسيرة لمن أخلص النية وبدأ بالعمل. 
+                <br> كن المسلم المطور، المبتكر، وصانع التغيير في عالمنا الرقمي.
+            </p>
+            <div style="margin-top: 60px; font-size: 44px; color: var(--gold); font-family: 'Amiri', serif;">// انطلق، فالمستقبل يُكتب بيدك</div>
+        </div>
+        <button class="ai-btn" onclick="askAI(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> كلمة أخيرة</button>
+        <div class="overlay"><div class="content"></div><button class="close-btn" onclick="closeOverlay(this)">إغلاق</button></div>
+    </div>
+
+</div>
+
+<script>
+    const apiKey = ""; 
+
+    async function askAI(btn) {
+        const container = btn.closest('.slide');
+        const topic = container.getAttribute('data-topic');
+        const overlay = container.querySelector('.overlay');
+        const contentDiv = container.querySelector('.content');
+
+        overlay.style.display = 'flex';
+        contentDiv.innerHTML = '<div class="loader"></div><p style="margin-top:25px; color: #10b981; font-weight: 500;">يتم الآن استحضار فكرة ملهمة لجيل النهضة...</p>';
+
+        const prompt = `أنت موجه تقني وملهم. الموضوع: ${topic}. 
+        بناءً على هذا الموضوع، قدم نصيحة أو خاطرة قصيرة جداً (جملة أو جملتين) تشجع المبتدئين تماماً الذين ليس لديهم خلفية برمجية، 
+        وتربط ذلك بضرورة تميز المسلم وتطوره. استخدم لغة عربية فصيحة ومؤثرة جداً. لا تضع أي نجوم أو رموز تعبيرية نجمية.`;
+
+        try {
+            const response = await fetchWithRetry(
+                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                }
+            );
+            const data = await response.json();
+            const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "تذكر أن كل عظيم في هذا العلم بدأ بسؤال بسيط. انطلق بنية النفع للأمة.";
+            contentDiv.innerHTML = `<p class="ai-txt">${text}</p>`;
+        } catch (e) {
+            contentDiv.innerHTML = '<p class="ai-txt">البرمجة هي لغة القوة في عصرنا، فاجعل منها وسيلة لنهضتك ورفعة أمتك.</p>';
+        }
+    }
+
+    async function fetchWithRetry(url, options, retries = 3) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const res = await fetch(url, options);
+                if (res.ok) return res;
+            } catch (e) {}
+            await new Promise(r => setTimeout(r, 1000));
+        }
+        throw new Error("API Connection Failed");
+    }
+
+    function closeOverlay(btn) {
+        btn.closest('.overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
